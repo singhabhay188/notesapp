@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="flex center">
+        <h1><i class="ri-booklet-fill"></i> Note it</h1>
+        <ul class="flex center">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="archive.html">Archive</a></li>
+        </ul>
+    </nav>
+    <main class="flex">
+        <div id="edit-section" class="flex">
+            <input type="text" id="titleInput" placeholder="Title">
+            <textarea id="notesInput" cols="30" rows="10" placeholder="Make a note here ..."></textarea>
+            <i id="addButton" class="ri-add-circle-fill"></i>
+        </div>
+        <!--Delete 
+            pin archive-->
+        <div id="pinned-section" class="containerBig">
+            <h2>Pinned Notes</h2>
+            <div class="notes-container"></div>
+        </div>
+        <div id="notes-section" class="containerBig">
+            <h2>Notes</h2>
+            <div class="notes-container"></div>
+        </div>
+    </main>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
