@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +12,7 @@
         <h1><i class="ri-booklet-fill"></i> Note it</h1>
         <ul class="flex center">
             <li><a href="index.html">Home</a></li>
-            <li><a href="archive.html">Archive</a></li>
+            <li id="archiveButton">Archive</li>
         </ul>
     </nav>
     <main class="flex">
@@ -36,7 +33,15 @@
         </div>
     </main>
 
+    <div id="archiveNotes">
+        <i id="closeArchive" class="ri-close-fill"></i>
+        <div id="archive-section" class="containerBig">
+            <h2>Archived Notes</h2>
+            <div class="notes-container"></div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+
+    <script src="script.js" type="module"></script>
 </body>
 </html>
