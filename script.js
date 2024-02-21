@@ -10,10 +10,10 @@ let myNotes = {
         id:0,
         title:'Example',
         note:'This is example note',
+        isPinned:false,
+        isArchived:false
     },
 }
-
-let pinNotes = {};
 
 addButton.addEventListener('click',()=>{
     let title = titleInput.value.trim();
@@ -31,6 +31,7 @@ addButton.addEventListener('click',()=>{
 })
 
 function renderNotes(){
+    pinnedSection.innerHTML = '';
     notesSection.innerHTML = '';
 
     for(let key in myNotes){
@@ -40,59 +41,31 @@ function renderNotes(){
         div.id = note.id;
         div.classList.add('notes');
         div.classList.add('flex');
-        div.innerHTML = `<h4>${note.title}</h4><p>${note.note}</p><div class="tools flex center"><i class="ri-delete-bin-fill"></i><i class="ri-pushpin-fill"></i><i class="ri-inbox-archive-fill"></i></div>`;
+        div.innerHTML = `<h4>${note.title}</h4><p>${note.note}</p><div class="tools flex center"><i class="ri-delete-bin-fill"></i><i class="ri-${note.isPinned ? "unpin" : "pushpin"}-fill"></i><i class="ri-inbox-archive-fill"></i></div>`;
 
         let deleteI = div.children[2].children[0];
         let pinI = div.children[2].children[1];
         let archiveI = div.children[2].children[2];
         
         deleteI.addEventListener('click',()=>{
-            notesSection.removeChild(div);
+            if (note.isPinned) {
+                pinnedSection.removeChild(div);
+            } else {
+                notesSection.removeChild(div);
+            }
             delete myNotes[note.id];
         })
         pinI.addEventListener('click',()=>{
-            delete myNotes[note.id];
-            pinNotes[note.id] = note;
-            renderPinNotes();
-            notesSection.removeChild(div);
-        })
-        
-        notesSection.appendChild(div);
-    }
-}
-
-
-function renderPinNotes(){
-    pinnedSection.innerHTML = '';
-
-    for(let key in pinNotes){
-        let note = pinNotes[key];
-
-        let div = document.createElement('div');
-        div.id = note.id;
-        div.classList.add('notes');
-        div.classList.add('flex');
-        div.innerHTML = `<h4>${note.title}</h4><p>${note.note}</p><div class="tools flex center"><i class="ri-delete-bin-fill"></i><i class="ri-unpin-fill"></i><i class="ri-inbox-archive-fill"></i></div>`;
-
-        let deleteI = div.children[2].children[0];
-        let pinI = div.children[2].children[1];
-        let archiveI = div.children[2].children[2];
-        
-        deleteI.addEventListener('click',()=>{
-            pinnedSection.removeChild(div);
-            delete pinNotes[note.id];
-        })
-        pinI.addEventListener('click',()=>{
-            delete pinNotes[note.id];
-            myNotes[note.id] = note;
+            myNotes[note.id].isPinned = !myNotes[note.id].isPinned;
             renderNotes();
-            pinnedSection.removeChild(div);
         })
         
-        pinnedSection.appendChild(div);
+        if (note.isPinned) {
+            pinnedSection.appendChild(div);
+        } else {
+            notesSection.appendChild(div);
+        }
     }
 }
-
 
 renderNotes();
-renderPinNotes();
